@@ -31,10 +31,11 @@ function returnFirstArgument(something) {
    sumWithDefaults(10) вернет 110
  */
 function sumWithDefaults(a, b) {
-  const rtrn = a + b;
-  return rtrn;
+  if (b === undefined) {
+    b = 100;
+  }
+  return a + b;
 }
-sumWithDefaults(10, 50);
 
 /*
  Задание 3:
@@ -61,9 +62,9 @@ function returnFnResult(fn) {
    console.log(f()); // выведет 12
    console.log(f()); // выведет 13
  */
-function returnCounter(number = 0) {
-  return function f() {
-    ++number;
+function returnCounter(x = 0) {
+  return function F() {
+    return ++x;
   };
 }
 
@@ -95,7 +96,15 @@ function returnArgumentsArray() {
 
    console.log(newSum()) выведет 6
  */
-function bindFunction(fn) {}
+function bindFunction(F) {
+  const arg = [];
+  for (let i = 1; i < arguments.length; i++) {
+    arg.push(arguments[i]);
+  }
+  return function () {
+    return F.apply(null, arg);
+  };
+}
 
 export {
   returnFirstArgument,
